@@ -33,6 +33,6 @@ jobs:
           # Artifact name
           name: release-android
           # 导出文件夹
-          path: build/ios/
+          path: build/app/outputs/flutter-apk/
           # The desired behavior if no files are found using the provided path.
 
