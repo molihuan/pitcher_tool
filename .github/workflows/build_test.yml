@@ -1,4 +1,4 @@
-name: Flutter CI.
+name: Build Android Apk
 on:
   # 手动触发
   workflow_dispatch:
