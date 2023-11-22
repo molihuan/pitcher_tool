@@ -1,105 +1,40 @@
-import 'dart:io';
-import 'dart:math';
-
-import 'package:excel/excel.dart';
 import 'package:flutter/material.dart';
-import 'package:test_appcenter/utils/excel_utils.dart';
-import 'package:test_appcenter/utils/file_utils.dart';
-import 'package:test_appcenter/utils/str_utils.dart';
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 
-void main() {
-  runApp(const MyApp());
+import 'package:nb_utils/nb_utils.dart';
+import 'package:pitcher_tool/routes/app_pages.dart';
+
+
+Future<void> main() async {
+  /// 插件初始化
+  WidgetsFlutterBinding.ensureInitialized();
+  ///init nb_utils
+  await initialize();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
+    return GetMaterialApp(
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.orange),
         useMaterial3: true,
       ),
-      home: HomePage(),
-    );
-  }
-}
 
-class HomePage extends StatefulWidget {
-  HomePage({super.key});
+      debugShowCheckedModeBanner: false,
+      // 初始路由
+      initialRoute: AppPages.INITIAL,
+      // 所有的页面
+      getPages: AppPages.routes,
+      ///flutter_smart_dialog初始化
+      navigatorObservers: [FlutterSmartDialog.observer],
+      builder: FlutterSmartDialog.init(),
 
-  final String title = "投手工具";
-  final TextEditingController facebookAccountMsgInput = TextEditingController();
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Column(
-        children: <Widget>[
-          TextField(
-            controller: widget.facebookAccountMsgInput,
-            decoration: InputDecoration(
-              filled: true,
-              fillColor: Colors.grey.withOpacity(0.1),
-              hintText: '二解账号信息',
-              contentPadding: EdgeInsets.all(20),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide.none,
-              ),
-            ),
-          ),
-          ElevatedButton(
-              onPressed: () {
-                var facebookMsg = StrUtils.getFacebookMsg(
-                    widget.facebookAccountMsgInput.text);
-                print(facebookMsg);
-                var excel = ExcelUtils.load(
-                    FileUtils.getCurrentExecutablePath() + "/批量导入模板.xlsx");
-                Sheet sheetObject = excel["Sheet1"];
-                Data cell = sheetObject.cell(
-                    CellIndex.indexByColumnRow(columnIndex: 1, rowIndex: 1));
-                cell.value =
-                    "${facebookMsg.checkCode}\n${facebookMsg.email}\n${facebookMsg.emailPwd}\n${facebookMsg.idCardImgUrl}";
-
-                cell = sheetObject.cell(
-                    CellIndex.indexByColumnRow(columnIndex: 3, rowIndex: 1));
-                cell.value = "facebook.com";
-
-                cell = sheetObject.cell(
-                    CellIndex.indexByColumnRow(columnIndex: 4, rowIndex: 1));
-                cell.value = facebookMsg.userName;
-
-                cell = sheetObject.cell(
-                    CellIndex.indexByColumnRow(columnIndex: 5, rowIndex: 1));
-                cell.value = facebookMsg.userPwd;
-
-                cell = sheetObject.cell(
-                    CellIndex.indexByColumnRow(columnIndex: 6, rowIndex: 1));
-                cell.value = facebookMsg.checkCode;
-
-                cell = sheetObject.cell(
-                    CellIndex.indexByColumnRow(columnIndex: 8, rowIndex: 1));
-                cell.value = "noproxy";
-
-                var fileSave =
-                    File(FileUtils.getCurrentExecutablePath() + "/生成.xlsx");
-                fileSave.writeAsBytesSync(excel.encode()!);
-              },
-              child: Text("生成"))
-        ],
-      ),
+      navigatorKey: navigatorKey,
     );
   }
 }

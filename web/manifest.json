@@ -1,6 +1,6 @@
 {
-    "name": "test_appcenter",
-    "short_name": "test_appcenter",
+    "name": "pitcher_tool",
+    "short_name": "pitcher_tool",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

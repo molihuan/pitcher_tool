@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "test_appcenter" "\0"
+            VALUE "CompanyName", "com.molihuan" "\0"
+            VALUE "FileDescription", "pitcher_tool" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "test_appcenter" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2023 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "test_appcenter.exe" "\0"
-            VALUE "ProductName", "test_appcenter" "\0"
+            VALUE "InternalName", "pitcher_tool" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2023 com.molihuan. All rights reserved." "\0"
+            VALUE "OriginalFilename", "pitcher_tool.exe" "\0"
+            VALUE "ProductName", "pitcher_tool" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

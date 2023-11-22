@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:excel/excel.dart';
-import 'package:test_appcenter/models/facebook_msg.dart';
+import 'package:pitcher_tool/models/facebook_msg.dart';
 
 class StrUtils {
   static FacebookMsg getFacebookMsg(String msg) {

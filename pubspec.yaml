@@ -1,24 +1,40 @@
-name: test_appcenter
+name: pitcher_tool
 description: A new Flutter project.
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
 
 version: 1.0.0+1
 
 environment:
   sdk: '>=3.1.5 <4.0.0'
 
+
 dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
+  #路由组件
+  get: ^4.6.6
   excel: ^3.0.0
   path: ^1.8.3
+  #工具类 包含shared_preferences
+  nb_utils: ^6.0.6
+  #吐司弹窗框架
+  flutter_smart_dialog: ^4.9.5+1
+
+  velocity_x: ^4.1.1
+
+  file_picker: ^6.1.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
   flutter_lints: ^2.0.0
+
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/FacebookAccountImportTemplate.xlsx
