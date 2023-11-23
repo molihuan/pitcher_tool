@@ -5,4 +5,5 @@ part of 'app_pages.dart';
 abstract class AppRoutes {
   static const Home = '/home';
   static const QuickFacebook = '/quick_facebook';
+  static const QuickFacebookApi = '/quick_facebook_api';
 }

@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:pitcher_tool/pages/home/bindings.dart';
 import 'package:pitcher_tool/pages/home/view.dart';
 import 'package:pitcher_tool/pages/quick_facebook/index.dart';
+import 'package:pitcher_tool/pages/quick_facebook_api/index.dart';
 
 part 'app_routes.dart';
 
@@ -20,6 +21,11 @@ class AppPages {
       name: AppRoutes.QuickFacebook,
       page: () => const QuickFacebookPage(),
       binding: QuickFacebookBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.QuickFacebookApi,
+      page: () => const QuickFacebookApiPage(),
+      binding: QuickFacebookApiBinding(),
     ),
   ];
 }
