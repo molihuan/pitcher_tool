@@ -1,9 +1,12 @@
+import 'dart:collection';
+
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:get/get.dart';
 import 'package:pitcher_tool/http/http.dart';
 import 'package:pitcher_tool/models/browser_debug_config.dart';
 import 'package:pitcher_tool/models/facebook_msg.dart';
 import 'package:pitcher_tool/utils/str_utils.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 import 'index.dart';
 
@@ -29,8 +32,8 @@ class QuickFacebookApiController extends GetxController {
     return result['data']['id'];
   }
 
-  Future<BrowserDebugConfig?> openBrowser(int id) async {
-    Map? result = await HttpUtils.openBrowser(id: id);
+  Future<BrowserDebugConfig?> openBrowser(String id) async {
+    Map? result = await HttpUtils.openBrowser(id);
     if (result == null || result['code'] == -1) {
       return null;
     }
@@ -41,10 +44,23 @@ class QuickFacebookApiController extends GetxController {
         webDriver: data['webdriver']);
   }
 
+  Future<void> queryPackets() async {
+    Map? result = await HttpUtils.queryPackets();
+    if (result == null || result['code'] == -1) {
+      return null;
+    }
+
+    Vx.log(result);
+    List<Map> data = result['data']['list'];
+    state.facebookAccountGroup = data;
+    update();
+  }
+
   /// 在 widget 内存中分配后立即调用。
   @override
   void onInit() {
     super.onInit();
+    queryPackets();
   }
 
   /// 在 onInit() 之后调用 1 帧。这是进入的理想场所

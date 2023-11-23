@@ -12,6 +12,44 @@ final options = BaseOptions(
 final dio = Dio(options);
 
 class HttpUtils {
+  /////执行成功
+  // {
+  // "code": 0,
+  // "data": {
+  //   "list": [
+  //     {
+  //       "group_id": "100",     //分组ID，添加账号时需要
+  //       "group_name": "group1"  //分组名称
+  //     },
+  //     {
+  //       "group_id": "101",
+  //       "group_name": "group2"
+  //     }
+  //   ],
+  //   "page": 1,
+  //   "page_size": 10
+  // },
+  // "msg": "Success"
+  // }
+  //
+  // //执行失败
+  // {
+  // "code":-1,
+  // "data":{},
+  // "msg":"failed"
+  // }
+  static Future<Map?> queryPackets() async {
+    Response response =
+        await dio.get(URL_QUERY_PACKETS, queryParameters: {'page_size': 20});
+    log(response.data);
+    if (response.statusCode == 200) {
+      return response.data;
+    } else {
+      SmartDialog.showToast("queryPackets err");
+      return null;
+    }
+  }
+
   ///打开浏览器,返回调试的信息,自动化必备信息
   /////执行成功
   // {
@@ -33,11 +71,9 @@ class HttpUtils {
   //   "data":{},
   //   "msg":"failed"
   // }
-  static Future<Map?> openBrowser({int? id, int? serialNumber}) async {
-    Response response = await dio.get(URL_START_BROWSER, queryParameters: {
-      'user_id': id,
-      'serial_number': serialNumber,
-    });
+  static Future<Map?> openBrowser(String id) async {
+    Response response =
+        await dio.get(URL_START_BROWSER, queryParameters: {'user_id': id});
 
     log(response.data);
     if (response.statusCode == 200) {
@@ -66,8 +102,10 @@ class HttpUtils {
   // }
   static Future<Map?> creatFacebookUser(FacebookMsg facebookMsg) async {
     Response response = await dio.post(URL_CREATE_USER, data: {
+      'name': '测试自动化',
+
       ///分组
-      'group_id': 'user_hlwcdc',
+      'group_id': '3155938',
 
       ///代理设置
       'user_proxy_config': {"proxy_soft": "no_proxy"},
@@ -79,8 +117,12 @@ class HttpUtils {
       },
 
       ///打开域名
-      'domain_name': 'facebook.com',
-      'open_urls': ['https://outlook.com'],
+      'domain_name': 'https://facebook.com',
+      'open_urls': [
+        'https://start.adspower.net/',
+        'https://facebook.com',
+        'https://outlook.com',
+      ],
 
       ///账号信息
       'username': facebookMsg.userName,

@@ -1,8 +1,13 @@
+import 'dart:collection';
+
 import 'package:get/get.dart';
 
 class QuickFacebookApiState {
   // title
-  final _title = "".obs;
-  set title(value) => _title.value = value;
-  get title => _title.value;
+
+  final _facebookAccountGroup = <Map>[].obs;
+
+  set facebookAccountGroup(value) => _facebookAccountGroup.value = value;
+
+  get facebookAccountGroup => _facebookAccountGroup;
 }
