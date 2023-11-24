@@ -16,7 +16,8 @@ class QuickFacebookApiController extends GetxController {
   final state = QuickFacebookApiState();
 
   ///返回生成的账号id,失败则返回空
-  Future<String?> createFacebookUser(String inputText) async {
+  Future<String?> createFacebookUser(String inputText,
+      {String? browserName}) async {
     if (inputText.isEmpty) {
       SmartDialog.showToast("信息为空");
       return null;
@@ -24,7 +25,10 @@ class QuickFacebookApiController extends GetxController {
 
     FacebookMsg facebookMsg = StrUtils.getFacebookMsg(inputText);
     print(facebookMsg);
-    Map? result = await HttpUtils.creatFacebookUser(facebookMsg);
+    Map? result = await HttpUtils.creatFacebookUser(
+        facebookMsg: facebookMsg,
+        groupId: state.selectedGroupId,
+        name: browserName ?? "");
     if (result == null || result['code'] == -1) {
       return null;
     }
@@ -50,10 +54,21 @@ class QuickFacebookApiController extends GetxController {
       return null;
     }
 
-    Vx.log(result);
-    List<Map> data = result['data']['list'];
+    List<dynamic> data = result['data']['list'];
+    print(data);
     state.facebookAccountGroup = data;
-    update();
+    // update();
+  }
+
+  String? getGroupName({String? groupId}) {
+    groupId = groupId ?? state.selectedGroupId;
+
+    for (var item in state.facebookAccountGroup) {
+      if (groupId == item['group_id']) {
+        return item['group_name'];
+      }
+    }
+    return null;
   }
 
   /// 在 widget 内存中分配后立即调用。

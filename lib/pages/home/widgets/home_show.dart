@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
+import 'package:http_mock_adapter/http_mock_adapter.dart';
+import 'package:pitcher_tool/http/api.dart';
+import 'package:pitcher_tool/http/http.dart';
+import 'package:pitcher_tool/http/mock.dart';
 import 'package:pitcher_tool/routes/app_pages.dart';
 import 'package:pitcher_tool/utils/platform_utils.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -20,6 +24,8 @@ class HomeShow extends GetView<HomeController> {
         body: Container(
           child: HStack(
             [
+              ElevatedButton(onPressed: () async {}, child: "测试按钮".text.make())
+                  .px12(),
               ElevatedButton(
                       onPressed: () {
                         PlatformUtils.voidCallback(

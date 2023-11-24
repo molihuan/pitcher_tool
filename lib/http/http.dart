@@ -5,7 +5,7 @@ import 'package:pitcher_tool/http/api.dart';
 import 'package:pitcher_tool/models/facebook_msg.dart';
 
 final options = BaseOptions(
-  baseUrl: BASE_AD_API,
+  baseUrl: URL_BASE_AD_API,
   connectTimeout: Duration(seconds: 5),
   receiveTimeout: Duration(seconds: 3),
 );
@@ -100,12 +100,15 @@ class HttpUtils {
   //   "data":{},
   //   "msg":"failed"
   // }
-  static Future<Map?> creatFacebookUser(FacebookMsg facebookMsg) async {
+  static Future<Map?> creatFacebookUser(
+      {required FacebookMsg facebookMsg,
+      String name = '',
+      required String groupId}) async {
     Response response = await dio.post(URL_CREATE_USER, data: {
-      'name': '测试自动化',
+      'name': name,
 
       ///分组
-      'group_id': '3155938',
+      'group_id': groupId,
 
       ///代理设置
       'user_proxy_config': {"proxy_soft": "no_proxy"},
