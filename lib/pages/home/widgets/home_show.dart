@@ -21,33 +21,150 @@ class HomeShow extends GetView<HomeController> {
         appBar: AppBar(
           title: Text("超级投手工具"),
         ),
-        body: Container(
-          child: HStack(
-            [
-              ElevatedButton(onPressed: () async {}, child: "测试按钮".text.make())
-                  .px12(),
-              ElevatedButton(
-                      onPressed: () {
-                        PlatformUtils.voidCallback(
-                            web: () {
-                              SmartDialog.showToast("不支持");
-                            },
-                            android: () {},
-                            ios: () {},
-                            other: () {
-                              Get.toNamed(AppRoutes.QuickFacebook);
-                            });
-                      },
-                      child: "Excel速拿二解号".text.make())
-                  .px12(),
-              ElevatedButton(
-                      onPressed: () {
-                        Get.toNamed(AppRoutes.QuickFacebookApi);
-                      },
-                      child: "Api速拿二解号".text.make())
-                  .px12(),
-            ],
-          ).scrollVertical().p20(),
+        body: Wrap(
+          children: [
+            Container(
+              child: <TableRow>[
+                TableRow(
+                  children: [
+                    "账号".text.make().p12(),
+                    "操作".text.make().p12(),
+                  ],
+                ),
+                for (var entry in [1, 2, 3])
+                  TableRow(
+                    children: [
+                      Text("111").text.make().p12(),
+                      ElevatedButton(
+                          onPressed: () {
+                            tos();
+                          },
+                          child: "选择".text.make()),
+                    ],
+                  )
+              ].table.gray300.middleAligned.roundedBorder.make(),
+            ).p4(),
+            ElevatedButton(
+                    onPressed: () async {
+                      SmartDialog.showToast("你干嘛~~哎呦~~");
+                    },
+                    child: "测试按钮".text.make())
+                .p8(),
+            ElevatedButton(
+                    onPressed: () {
+                      Get.toNamed(AppRoutes.QuickFacebookApi);
+                    },
+                    child: "速拿二解号".text.make())
+                .p8(),
+            ElevatedButton(
+                    onPressed: () {
+                      PlatformUtils.voidCallback(
+                          web: () {
+                            SmartDialog.showToast("不支持");
+                          },
+                          android: () {},
+                          ios: () {},
+                          other: () {
+                            Get.toNamed(AppRoutes.QuickFacebook);
+                          });
+                    },
+                    child: "Excel速拿二解号".text.make())
+                .p8(),
+            ElevatedButton(
+                    onPressed: () {
+                      tos();
+                    },
+                    child: "自动登录邮箱".text.make())
+                .p8(),
+            ElevatedButton(
+                    onPressed: () {
+                      tos();
+                    },
+                    child: "打开邮箱页".text.make())
+                .p8(),
+            ElevatedButton(
+                    onPressed: () {
+                      tos();
+                    },
+                    child: "自动输入二次验证码".text.make())
+                .p8(),
+            ElevatedButton(
+                    onPressed: () {
+                      tos();
+                    },
+                    child: "自动授权主页并登记授权主页".text.make())
+                .p8(),
+            ElevatedButton(
+                    onPressed: () {
+                      tos();
+                    },
+                    child: "下户自动更换主页”茶“背景头像".text.make())
+                .p8(),
+            ElevatedButton(
+                    onPressed: () {
+                      tos();
+                    },
+                    child: "自动填写开户资料".text.make())
+                .p8(),
+            ElevatedButton(
+                    onPressed: () {
+                      tos();
+                    },
+                    child: "微信自动发消息@某人".text.make())
+                .p8(),
+            ElevatedButton(
+                    onPressed: () {
+                      tos();
+                    },
+                    child: "打开内部主页".text.make())
+                .p8(),
+            ElevatedButton(
+                    onPressed: () {
+                      tos();
+                    },
+                    child: "打开伽佰主页".text.make())
+                .p8(),
+            ElevatedButton(
+                    onPressed: () {
+                      tos();
+                    },
+                    child: "打开腾达主页".text.make())
+                .p8(),
+            ElevatedButton(
+                    onPressed: () {
+                      tos();
+                    },
+                    child: "打开资料库".text.make())
+                .p8(),
+            ElevatedButton(
+                    onPressed: () {
+                      tos();
+                    },
+                    child: "打开BM".text.make())
+                .p8(),
+            ElevatedButton(
+                    onPressed: () {
+                      tos();
+                    },
+                    child: "打开发广告页面".text.make())
+                .p8(),
+            ElevatedButton(
+                    onPressed: () {
+                      tos();
+                    },
+                    child: "打开业务支持中心".text.make())
+                .p8(),
+            ElevatedButton(
+                    onPressed: () {
+                      tos();
+                    },
+                    child: "打开翻译".text.make())
+                .p8(),
+          ],
         ));
+  }
+
+  void tos() {
+    SmartDialog.showToast("正在开发中...");
   }
 }

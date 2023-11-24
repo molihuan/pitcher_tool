@@ -1,9 +1,11 @@
 import 'dart:collection';
 
 import 'package:get/get.dart';
+import 'package:pitcher_tool/dao/data_manager.dart';
 
 class QuickFacebookApiState {
   // title
+  final DataManager dataManager = DataManager();
 
   final _facebookAccountGroup = [].obs;
 
@@ -12,9 +14,12 @@ class QuickFacebookApiState {
   List get facebookAccountGroup => _facebookAccountGroup;
 
   ///选择的分组id
-  final _selectedGroupId = "测试分组id".obs;
+  late final _selectedGroupId = dataManager.groupId.obs;
 
-  set selectedGroupId(value) => _selectedGroupId.value = value;
+  set selectedGroupId(value) {
+    _selectedGroupId.value = value;
+    dataManager.groupId = value;
+  }
 
-  get selectedGroupId => _selectedGroupId.value;
+  String get selectedGroupId => _selectedGroupId.value;
 }

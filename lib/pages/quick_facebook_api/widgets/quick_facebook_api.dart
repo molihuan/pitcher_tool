@@ -67,8 +67,9 @@ class QuickFacebookApi extends GetView<QuickFacebookApiController> {
           ).px64().py16(),
           ElevatedButton(
                   onPressed: () async {
-                    if (controller.state.selectedGroupId == null) {
+                    if (controller.state.selectedGroupId.isEmpty) {
                       SmartDialog.showToast("请先选择分组");
+
                       return;
                     }
 
@@ -76,14 +77,14 @@ class QuickFacebookApi extends GetView<QuickFacebookApiController> {
                         textController.text,
                         browserName: browserNameController.text);
                     if (browserId != null) {
-                      SmartDialog.showToast("创建成功");
+                      SmartDialog.showToast("创建成功,正在为你打开,请稍后...");
                       textController.text = "";
                       controller.openBrowser(browserId);
                     } else {
                       SmartDialog.showToast("创建失败,请检查二解信息,或联系开发者");
                     }
                   },
-                  child: "创建账号".text.make().px64().py8())
+                  child: "创建账号并打开".text.make().px64().py8())
               .centered(),
         ]).centered(),
       ]).scrollVertical(),

@@ -12,7 +12,7 @@ Future<void> main() async {
 
   ///init nb_utils
   await initialize();
-  HttpMock.init();
+  HttpMock.init(need: false);
   runApp(MyApp());
 }
 
