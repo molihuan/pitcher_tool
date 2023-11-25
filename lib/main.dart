@@ -12,6 +12,7 @@ Future<void> main() async {
 
   ///init nb_utils
   await initialize();
+  ///http请求模拟
   HttpMock.init(need: false);
   runApp(MyApp());
 }
